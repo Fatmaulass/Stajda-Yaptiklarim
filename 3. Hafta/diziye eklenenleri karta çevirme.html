@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    #kart-Container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 5px;
+    }
+    .kart {
+      background-color: #e0e0e0;
+      border-radius: 10px;
+      text-align: center;
+      padding: 15px;
+      font-size: 18px;
+      cursor: pointer;  
+    }
+    .kart:hover{
+        border: 1.5px solid #ff9292;
+    }
+  </style>
+</head>
+<body>
+  <div id="kart-Container"></div>
+  <script>
+    const markalar = [
+      "a" ,"b ","cc","dd","ff","rr","tt","yy","qq","ww","gg","zz","ll","aa"];
+
+    function createCards() {
+      const container = document.getElementById("kart-Container");     
+      markalar.forEach(marka => {    
+        const kart = document.createElement("div");
+        kart.className = "kart";
+        kart.innerText = marka;    
+        container.appendChild(kart);
+      });}
+    window.onload = createCards;
+  </script>
+</body>
+</html>

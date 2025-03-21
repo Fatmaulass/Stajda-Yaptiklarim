@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .dil-secimi{
+            position: relative;
+            display: inline-block;
+        }
+        .secili-dil {
+            display: flex;
+            align-items: center;
+            background-color: #a2a0ea;
+            padding: 7px;
+            cursor: pointer;
+        }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #a2a0ea;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            margin-top: 5px;
+            width: 400px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .dropdown-menu input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            background-color: #ffffff;
+        }
+        .navdiller{
+            margin-top: 1px;
+            display:flex ;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        a {
+            margin:2.7px;
+            color: black;
+            font-weight: bold;
+            padding: 2px;
+            width: 110px;
+            height: 20px;
+            font-size: 14px;      
+            border-radius: 3px;
+            background: #fff;
+            float: left;
+            text-align: left;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            transition: all 0.15s;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        a:hover{
+            background-color: rgb(240, 241, 169);
+        }
+        span.flagg {
+            background-image: url(https://www.canbusemulator.com/images/css_sprites11062029.png);
+            width: 24px;
+            height: 17px;
+            display: block;
+            float: left;
+            margin-right: 4px;
+        }
+        span.trr { background-position: -240px 0;}
+        span.enn { background-position: -48px 0;}
+        span.arr { background-position: 0 0;}
+        span.bgg { background-position: -24px 0; }
+        span.cnn { background-position: 51px 0;}
+        span.czz { background-position: -168px 17px;}
+        span.dee { background-position: -96px 1px;}
+        span.ell { background-position: -96px 17px;}
+        span.ess { background-position: -216px 0;}
+        span.faa { background-position: -507px 0;}
+        span.frr { background-position: -72px 1px;}
+        span.hee { background-position: 75px 0;}
+        span.hrr { background-position: -48px 17px;}
+        span.huu { background-position: -120px 17px;}
+        span.inn { background-position: 0 17px;}
+        span.itt { background-position: -120px 0;}
+        span.jaa { background-position: -144px 17px;}
+        span.koo { background-position: 24px 0;}
+        span.pll { background-position: -24px 17px;}
+        span.ptt { background-position: -264px 0;}
+        span.roo { background-position: -168px 0px;}
+        span.ruu { background-position: -192px 0;}
+        span.srr { background-position: -72px 17px;}
+    </style>
+</head>
+<body>
+    <div class="dil-secimi">
+        <div class="secili-dil">         
+            <a href="https://www.canbusemulator.com/tr" class="cb-tr"><span class="flagg trr"></span>Türkçe</a> 
+            <a href="https://www.canbusemulator.com/en/" class="cb-en"><span class="flagg enn"></span>English</a>
+            <a href="https://www.canbusemulator.com/ar" class="cb-ar"><span class="flagg arr"></span>العربية</a> 
+            <button id="dropdownButton" style="margin-left: 5px;">▼</button>
+        </div>
+        <div class="dropdown-menu" id="acılırMenu" >
+            <input type="text" placeholder="Dil ara.." id="searchInput">
+            <div class="navdiller" >
+                <a href="https://www.canbusemulator.com/tr" class="cb-tr"><span class="flagg trr"></span>Türkçe</a> 
+                <a href="https://www.canbusemulator.com/en/" class="cb-en"><span class="flagg enn"></span>English</a>
+                <a href="https://www.canbusemulator.com/ar" class="cb-ar"><span class="flagg arr"></span>العربية</a> 
+                <a href="https://www.canbusemulator.com/bg" class="cb-bg"><span class="flagg bgg"></span>български</a>
+                <a href="https://www.canbusemulator.com/cn" class="cb-cn"><span class="flagg cnn"></span>中国人</a>
+                <a href="https://www.canbusemulator.com/cz" class="cb-cz"><span class="flagg czz"></span>čeština</a>
+                <a href="https://www.canbusemulator.com/de" class="cb-de"><span class="flagg dee"></span>Deutsch</a>
+                <a href="https://www.canbusemulator.com/el" class="cb-el"><span class="flagg ell"></span>ελληνικά</a> 
+                <a href="https://www.canbusemulator.com/es" class="cb-es"><span class="flagg ess"></span>Español</a> 
+                <a href="https://www.canbusemulator.com/fa" class="cb-fa"><span class="flagg faa"></span>فارسی</a> 
+                <a href="https://www.canbusemulator.com/fr" class="cb-fr"><span class="flagg frr"></span>Français</a>
+                <a href="https://www.canbusemulator.com/he" class="cb-he"><span class="flagg hee"></span>עִברִית</a> 
+                <a href="https://www.canbusemulator.com/hr" class="cb-hr"><span class="flagg hrr"></span>Bosanski</a> 
+                <a href="https://www.canbusemulator.com/hu" class="cb-hu"><span class="flagg huu"></span>Magyar</a> 
+                <a href="https://www.canbusemulator.com/in" class="cb-in"><span class="flagg inn"></span>हिन्दी</a> 
+                <a href="https://www.canbusemulator.com/it" class="cb-it"><span class="flagg itt"></span>Italiano</a> 
+                <a href="https://www.canbusemulator.com/ja" class="cb-ja"><span class="flagg jaa"></span>日本語</a> 
+                <a href="https://www.canbusemulator.com/ko" class="cb-ko"><span class="flagg koo"></span>한국인</a> 
+                <a href="https://www.canbusemulator.com/pl" class="cb-pl"><span class="flagg pll"></span>Dialekt</a>
+                <a href="https://www.canbusemulator.com/pt" class="cb-pt"><span class="flagg ptt"></span>Português</a> 
+                <a href="https://www.canbusemulator.com/ro" class="cb-ro"><span class="flagg roo"></span>Română</a> 
+                <a href="https://www.canbusemulator.com/ru" class="cb-ru"><span class="flagg ruu"></span>Русский</a> 
+                <a href="https://www.canbusemulator.com/sr" class="cb-sr"><span class="flagg srr"></span>Hrvatski</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('dropdownButton').addEventListener('click', function() {
+            const acılırMenu = document.getElementById('acılırMenu');
+            if (acılırMenu.style.display === 'block') {
+                acılırMenu.style.display = 'none';
+            } 
+            else {
+                acılırMenu.style.display = 'block';
+            } 
+        });
+        window.addEventListener('click', function(event) {
+            const acılırMenu = document.getElementById('acılırMenu');
+            if (!event.target.matches('.secili-dil, .secili-dil *')) {
+                acılırMenu.style.display = 'none';
+            }
+        });
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const filter = this.value.toLowerCase();
+            const links = document.querySelectorAll('.navdiller a');
+            links.forEach(link => {
+                const text = link.textContent || link.innerText;
+                if (text.toLowerCase().indexOf(filter) > -1) {
+                    link.style.display = "";
+                } else {
+                    link.style.display = "none";
+                }
+            });
+        });
+        document.getElementById('searchInput').addEventListener('click', function(event) {
+            event.stopPropagation();
+        });
+    </script>
+</body>
+</html>

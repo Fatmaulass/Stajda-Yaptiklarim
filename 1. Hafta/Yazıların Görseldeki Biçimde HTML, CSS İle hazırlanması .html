@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+     @media screen and (min-width: 800px){
+        div.container{
+            grid-template-columns: repeat(4, 1fr);
+        }        
+    }
+    @media screen and (min-width: 500px) and (max-width:800px){
+        div.container{
+            grid-template-columns: repeat(3, 1fr);
+        }  
+    }  
+    @media screen and (max-width: 500px){
+        div.container{
+            grid-template-columns: repeat(2, 1fr);
+        }  
+    }   
+    </style>
+</head>
+<body 
+    style="font-family: Arial, sans-serif; 
+    align-items: center; height: 100vh; 
+    background-color: #bad2dc;">
+    <div class="container" 
+    style="display: grid;  gap: 20px; 
+    ">
+        <div class="card" style="background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;">
+            <p style="margin: 10px 0 0; color: #302424; font-size: 20px;"> OBD 16 PIN </p>
+        </div>
+        <div class="card" style="background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;">
+            <p style="margin: 10px 0 0; color: #302424; font-size: 20px;">Thinktool ve Thinktool master cihaza ihtiyaç duyar. </p>
+        </div>
+        <div class="card" 
+        style="background-color: white;
+        padding: 20px; border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;">
+            <p style="margin: 10px 0 0; color: #302424; font-size: 20px;">Can FD uyumlu araçlarda çalışır</p>
+        </div>
+        <div class="card" 
+        style="background-color: white;
+        padding: 20px; border-radius: 10px; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;">
+            <h4 style = " margin: 0; font-size: 20px;">Araba Modelleri</h4>
+            <ul style="font-size: 15px;">
+                <li>GM</li>
+                <li>AUDI</li>
+                <li>BMW</li>
+                <li>JAGUAR</li>
+                <li>LAND ROVER</li>
+            </ul>
+        </div>
+        <div class="card" style="background-color: white;
+        padding: 20px; border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: center;">
+            <p style="margin: 10px 0 0; color: #302424; font-size: 20px;">Arıza kodlarının, veri akışlarının ve diğer özel fonksiyonların okunmasına yardımcı olur</p>
+        </div>
+        <div class="card" style="background-color: white; padding: 20px;border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: center;">
+            <h4 style =" margin: 0; font-size: 20px;">Ürün Tipi</h4>
+            <ul style="font-size: 15px;">
+                <li>CAN FD Adaptörü</li>
+                <li>CAN FD Kablosu</li>
+                <li>Arıza Tespit Cihazı Aksesuarı</li>
+            </ul> 
+        </div>
+        <div class="card" 
+        style ="background-color: white;
+        padding: 20px; border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: center;">
+            <h4 style=" margin: 0; font-size: 20px;">Montaj Gerekmez</h4>
+            <p>Kutudan çıktığı gibi kullanıma hazır.</p>
+        </div>
+    </div>
+</body>
+</html>

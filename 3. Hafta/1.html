@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .kutu {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap; /* Wrap if needed */
+            align-items: center;
+            justify-content: center;
+        }
+        .tagler p {
+            background-color: rgb(121, 207, 210);
+            border-radius: 5px;
+            text-align: center;
+            padding: 5px;
+            color: white;
+            margin: 2px; /* Margin between tags */
+        }
+        .tagler {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2px;
+        }
+        .button {
+            background-color: blue;
+            color: white;
+            cursor: pointer;
+            height: 30px;
+            text-align: center;
+            align-items: center;
+            display: flex; /* Center text inside the button */
+            justify-content: center; /* Center text inside the button */
+            width: 100px;
+            border: none; /* Remove default button border */
+            border-radius: 5px; /* Optional: add border-radius */
+        }
+        @media screen and (max-width: 650px) {
+            .kutu img {
+                width: 100%; /* Make image responsive */
+                max-width: 250px; /* Limit maximum width */
+            }
+            .button {
+                width: 100%; /* Full width on small screens */
+                height: 50px; /* Increase height for better usability */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="kutu">
+        <img src="https://www.canbusemulator.com/images/virtuemart/product/resized/daf-vmax-emulator_240x240.jpg" alt="ürün fotosu" width="120">
+        <div style="margin: 5%;">
+            
+            <h4>Daf VMAX Emülatörü (ürün adı)</h4>
+            <p>Tork Kaybı, hız sınırlanması ve kırmızı-sarı adblue hatası artık problem değil.</p>
+            <p>VMAX Emülatörleri (kategori adı)</p>
+            <div class="tagler">
+                <p>DAF</p><p>Vmax</p><p>Vmax Emülatörü</p><p>Hız Limiti Kaldırma</p><p>Hız Sınırı Kaldırma</p><p>DAF Adblue Off</p>
+            </div>           
+        </div>
+        <div>
+            <p style="font-size: 25px; margin-top: 40px; text-align: center;">$199.0</p>
+            <button class="button">Satın Al</button>
+        </div>        
+    </div>
+</body>
+</html>

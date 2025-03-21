@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .kutu{
+            padding: 15px;
+            margin: 15px;
+            display: flex;
+            gap:15px
+        }
+        .içerik{
+            padding: 10px;
+            border: 1px solid black;
+            gap:15px;
+            flex-wrap: wrap;
+            display: grid;
+            justify-content: center;
+        }
+        .içerik, .doküman{
+            background-color: rgb(159, 196, 196);
+        }
+        .doküman{
+            justify-content: center;
+            display: none;
+            border: 1px solid black;
+            width: auto;
+            align-items: center;
+            padding: 15px;
+        }
+        .doküman p{
+            color: black;
+            font-size: 18px;
+            text-align: center;
+            cursor: pointer;
+        }
+        select{
+            padding: 10px;
+            font-size: 16px;
+            width: 260px;
+            background-color: rgb(255, 255, 255);
+            color: black;         
+        }
+    </style>
+</head>
+<body>
+    <div style="text-align: center;">
+        <h4>KURULUM - MONTAJ DOKÜMANLARI</h4>
+    </div>
+    <div class="kutu" style="justify-content: center;">
+        
+        <div class="içerik">
+            <select id="emisyon">
+                <option value="emisyon standartı" disabled selected>Emisyon standartı</option>
+                <option value="a">A</option>
+                <option value="b">B</option>
+            </select>
+
+            <select id="arac" disabled>
+                <option value="Aracı seçin" disabled selected>Aracı seçin</option> 
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>      
+                <option value="citroen">Citroen</option>            
+                <option value="peugeot">Peugeot</option>
+            </select>
+        </div>
+        <div class="doküman">
+            <p onclick="PDFi_İndir()"><span id="seciliArac"></span>  <img src="https://www.iconarchive.com/download/i112354/fa-team/fontawesome/FontAwesome-File-Pdf.1024.png" width="22"></p>
+        </div>
+    </div>
+    <script>
+        const arac=document.getElementById("arac");
+        const emisyon=document.getElementById("emisyon");
+        const seciliArac=document.getElementById("seciliArac");
+        const doküman=document.getElementsByClassName("doküman")
+
+        emisyon.addEventListener('change',function(){
+            if(emisyon.value){
+                arac.disabled=false;
+            }
+            else{
+                arac.disabled=true;
+            }
+        });
+        arac.addEventListener('change',function(){
+            if(arac.value){
+                seciliArac.textContent = arac.options[arac.selectedIndex].text;
+                doküman[0].style.display='flex';           
+            }
+        });
+        function PDFi_İndir() {
+            alert("PDF indiriliyor.");
+        }
+    </script>  
+</body>

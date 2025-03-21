@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .box {
+            background-color: #ffffff;
+            border-radius: 4px;
+            width: 70%;
+            margin: 20px auto;
+            position: relative;
+            padding-top: 0;
+        }
+        .teslimat{
+            margin:1%;
+            background-color:rgb(240, 233, 254);
+            border-radius: 4px;
+            width: 50%;
+            border:solid 1px black;
+            text-align: center;
+        }
+        .fatura{
+            margin:1%;
+            background-color: #f0fdff;
+            border-radius: 4px;
+            width: 50%;
+            border:solid 1px black;
+            text-align: center;
+        }
+        .flex-container{       
+            display: flex; 
+        }
+        table th{
+            background-color:aliceblue;
+        }
+        table ,th,td{
+            padding: 5px;
+            margin: 15px 0;
+            border: solid 1px rgb(0, 0, 0);
+            border-collapse: collapse;        
+        }
+        h5{
+            text-align: center;
+        }
+        caption{
+            text-align: left;
+            font-size: 13px;
+            font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+            margin-bottom: 3%;
+            font-weight: bold;
+        }
+        h3{
+            margin-left: 15%;
+        }
+        p{
+            margin-bottom: 8%;
+        }
+        button{
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            right: 8%;
+            top: 3%;
+            background-color: #ffffff;
+        }
+        .etiket {   
+            padding: 1%;
+            display: inline-block;
+            background-color: #3faa3f;
+            color: #ffffff;
+            border-radius: 3px;
+            }
+        @media screen and (max-width:750px){
+            button{
+                right: 3%;
+                top: 0.1%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h3>SİPARİŞ DETAYLARI</h3>
+    <div id="box" class="box hidden">
+        <div class="flex-container">
+            <div>
+                <h5>ZMUPUKHLB  Referanslı Sipariş -2024-07-13 tarihinde sipariş verildi</h5>
+                <p><strong>Kargo Firması </strong>Kargo Adı<br>
+                <strong>Ödeme Yöntemi </strong>Ödeme Yöntemi Türü<br></p>
+                <p style="cursor: pointer;">Faturanızı PDF dosyası olarak indirin.</p>
+            </div>
+            <div>
+                <button onclick="siparişSayfasınaGit()">Sipariş Tekrarı</button>
+            </div>
+        </div>
+        <div>
+            <table style="width: 100%;">
+                <caption>SİPARİŞİNİZİN DURUMUNU ADIM ADIM TAKİP EDİN</caption>
+                <tr>
+                    <th>Tarih</th>
+                    <th>Durum</th>
+                </tr>
+                <tr>
+                    <td>Sipariş tarihi gelicek</td>
+                    <td><label class="etiket">Sipariş durumu gelicek</label></td>
+                </tr>
+            </table>
+        </div>
+        <div class="flex-container">
+            <div class="teslimat">
+                <h5>Teslimat Adresim</h5>
+                <p>Sail Teknoloji<br>
+                    Sail Teknoloji<br>
+                    Cemalpaşa Mah. Fuzuli Cad. Galleria İş Merkezi No: 14/1062 01120 Seyhan, Adana Türkiye<br>
+                    05321110102
+                </p>
+
+            </div>
+            <div class="fatura">
+                <h5>Fatura Adresim</h5>
+                <p>Sail Teknoloji<br>
+                    Sail Teknoloji<br>
+                    Cemalpaşa Mah. Fuzuli Cad. Galleria İş Merkezi No: 14/1062 01120 Seyhan, Adana Türkiye<br>
+                    05321110102
+                </p>
+            </div>
+        </div>
+        <div>
+            <table style="width: 100%;">
+                <tr>
+                    <th>Tarih</th>
+                    <th>Kargo Firması</th>
+                    <th>Ağırlık</th>
+                    <th>Kargo Ücreti</th>
+                    <th>Kargo Takip Numarası</th>             
+                </tr>
+                <tr>
+                    <td>Tarih bilgisi</td>
+                    <td>Kargo Firması bilgisi</td>
+                    <td>Ağırlık bilgisi</td>
+                    <td>Kargo Ücreti bilgisi</td>
+                    <td>Kargo Takip Numarası bilgisi</td> 
+                </tr>
+            </table>
+        </div>
+        <div>
+            <table style="width: 100%;">
+                <tr>
+                    <th>Ürün</th>
+                    <th>Adet</th>
+                    <th>Birim Fiyat</th>
+                    <th>Toplam Fiyat</th>
+                </tr>
+                <tr>
+                    <td>Ürün bilgisi</td>
+                    <td>Adet bilgisi</td>
+                    <td>Birim Fiyat bilgisi</td>
+                    <td>Toplam Fiyat bilgisi</td>
+                </tr>
+                <tr>
+                    <td colspan="3">Alt Toplam</td>
+                    <td>Toplam Fiyat bilgisi</td>
+                </tr>
+                <tr>
+                    <td colspan="3">Nakliye ve Taşıma</td>
+                    <td>Toplam Fiyat bilgisi</td>
+                </tr>
+                <tr>
+                    <td colspan="3">Toplam</td>
+                    <td>Toplam Fiyat bilgisi</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script>
+        function siparişSayfasınaGit(){
+            //Sipariş Sayfası çağrılacak
+        }
+    </script>
+</body>

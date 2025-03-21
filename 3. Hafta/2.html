@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ürün Sayfası</title>
+    <style>
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 300px;
+            background-size: cover;
+            color: black;
+            text-align: center;
+            background-color: #f9f9f9; /* Default background color */
+        }
+        #productSection {
+            display: none;
+        }
+        #productList {
+            padding: 0;
+        }
+        .kutu {
+            height: 150px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+        .tagler p {
+            background-color: rgb(121, 207, 210);
+            border-radius: 5px;
+            text-align: center;
+            padding: 5px;
+            color: white;
+            margin: 2px;
+        }
+        .tagler {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2px;
+        }
+        .button {
+            background-color: blue;
+            color: white;
+            cursor: pointer;
+            height: 30px;
+            text-align: center;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            width: 100px;
+            border: none;
+            border-radius: 5px;
+        }
+        @media screen and (max-width: 650px) {
+            .kutu img {
+                width: 100%;
+                max-width: 250px;
+            }
+            .button {
+                width: 100%;
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="cardContainer"></div>
+    <div id="productSection">
+        <h2 id="brandTitle"></h2>
+        <div id="productList"></div>
+    </div>
+
+    <script>
+        const brands = [
+            { name: "Akia", imageUrl: "https://png.pngtree.com/png-vector/20220910/ourlarge/pngtree-tire-tracks-background-tyre-motorcycle-vector-png-image_14485336.jpg" },
+            { name: "Atlas", imageUrl: "https://png.pngtree.com/png-vector/20220910/ourlarge/pngtree-tire-tracks-background-tyre-motorcycle-vector-png-image_14485336.jpg" },
+            { name: "Baud", imageUrl: "https://png.pngtree.com/png-vector/20220910/ourlarge/pngtree-tire-tracks-background-tyre-motorcycle-vector-png-image_14485336.jpg" }
+        ];
+
+        const productsData = {
+            "Akia": [
+                { name: "Ürün 1", description: "Ürün 1 açıklaması", price: "$199.0" },
+                { name: "Ürün 2", description: "Ürün 2 açıklaması", price: "$299.0" },
+                { name: "Ürün 3", description: "Ürün 3 açıklaması", price: "$399.0" }
+            ],
+            "Atlas": [
+                { name: "Ürün 4", description: "Ürün 4 açıklaması", price: "$159.0" },
+                { name: "Ürün 5", description: "Ürün 5 açıklaması", price: "$259.0" }
+            ],
+            "Baud": [
+                { name: "Ürün 6", description: "Ürün 6 açıklaması", price: "$179.0" },
+                { name: "Ürün 7", description: "Ürün 7 açıklaması", price: "$289.0" },
+                { name: "Ürün 8", description: "Ürün 8 açıklaması", price: "$389.0" }
+            ]
+        };
+
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        function createBrandCards() {
+            const container = document.getElementById("cardContainer");
+            
+            brands.forEach(brand => {
+                const card = document.createElement("div");
+                card.className = "card";
+                card.innerText = brand.name;
+                card.style.backgroundImage = `url(${brand.imageUrl})`;
+                
+                card.addEventListener("click", function() {
+                    window.location.search = `?brand=${brand.name}`;
+                });
+                
+                container.appendChild(card);
+            });
+        }
+
+        function createProductCards(products) {
+            const productList = document.getElementById("productList");
+            productList.innerHTML = ''; // Önceki içerikleri temizle
+
+            products.forEach(product => {
+                const card = document.createElement("div");
+                card.className = "card";
+                card.innerHTML = `
+                    <img src="https://www.canbusemulator.com/images/virtuemart/product/resized/daf-vmax-emulator_240x240.jpg" alt="Ürün Fotoğrafı" width="120">
+                    <h4>${product.name}</h4>
+                    <p>${product.description}</p>
+                    <div class="tagler">
+                        <p>Özellik 1</p><p>Özellik 2</p><p>Özellik 3</p>
+                    </div>
+                    <p style="font-size: 25px;">${product.price}</p>
+                    <button class="button">Satın Al</button>
+                `;
+                
+                productList.appendChild(card);
+            });
+        }
+
+        function loadProducts(brand) {
+            const brandTitle = document.getElementById("brandTitle");
+            
+            brandTitle.innerText = `${brand} Ürünleri`;
+
+            if (productsData[brand]) {
+                createProductCards(productsData[brand]);
+            } 
+
+            document.getElementById("cardContainer").style.display = "none";
+            document.getElementById("productSection").style.display = "block";
+        }
+        window.onload = function() {
+            const brand = getUrlParameter('brand');
+            
+            if (brand) {
+                loadProducts(brand);
+            } else {
+                createBrandCards();
+            }
+        };
+    </script>
+</body>
+</html>

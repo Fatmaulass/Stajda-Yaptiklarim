@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NotePad Sitesi</title>
+    <style>
+        #notePad {
+            width: 100%;
+            height: 200px;
+            background-color: rgb(219, 231, 249);
+            color: rgb(5, 2, 2);
+            box-shadow: 3px 3px 7px rgb(35, 53, 172);
+            padding: 5px;
+            border: 2px green dotted;
+            margin-bottom: 10px;
+        }
+        #noteContent {
+            width: 100%;
+            min-height: 200px;
+            background-color: rgb(219, 231, 249);
+            color: rgb(5, 2, 2);
+            box-shadow: 3px 3px 7px rgb(35, 53, 172);
+            padding: 5px;
+            border: 2px green dotted;
+            margin-bottom: 10px;
+        }
+        button, input[type="color"] {
+            background-color: aliceblue;
+            padding: 5px;
+            font-size: 18px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        input[type="file"] {
+            cursor: pointer;
+        }
+        h3, .butonlar {
+            display: flex;
+            justify-content: center;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        label {
+            cursor: pointer;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div style="margin: 10px;">
+        <div>
+            <h3 style="text-align: center;">NotePad Uygulaması</h3>
+            <textarea id="notePad" placeholder="Notunuzu buraya yazınız.."></textarea>
+            <label for="imageInput" style="display: block; text-align: center; margin-top: 10px;">
+                Fotoğraf Seç
+                <input type="file" id="imageInput" accept="image/*" style="display: none;" />
+            </label>
+            <label for="colorPicker" style="display: block; text-align: center; margin-top: 10px;">
+                Yazı Rengini Seç
+                <input type="color" id="colorPicker" value="#000000" />
+            </label>
+        </div>
+        <div class="butonlar">
+            <button onclick="kaydet()">Kaydet</button>
+            <button onclick="temizle()">Temizle</button>
+            <button onclick="downloadPDF()">PDF Olarak İndir</button>
+        </div>
+        <div id="noteContent"></div>
+    </div>
+    <script>
+        window.onload = function() {
+            const savedNote = localStorage.getItem('note');
+            const savedColor = localStorage.getItem('color');
+
+            if (savedNote) {
+                document.getElementById('noteContent').innerHTML = savedNote;
+            }
+
+            if (savedColor) {
+                document.getElementById('colorPicker').value = savedColor;
+            }
+        }
+
+        function kaydet() {
+            const notePadContent = document.getElementById('notePad').value;
+            const noteContent = document.getElementById('noteContent').innerHTML;
+            const selectedColor = document.getElementById('colorPicker').value;
+            const coloredContent = `<span style="color: ${selectedColor};">${notePadContent}</span>`;
+            const fullContent = `${noteContent}<div>${coloredContent}</div>`;
+            localStorage.setItem('note', fullContent);
+            document.getElementById('noteContent').innerHTML = fullContent;
+            document.getElementById('notePad').value = '';
+        }
+
+        function temizle() {
+            document.getElementById('notePad').value = '';
+            document.getElementById('noteContent').innerHTML = '';
+            localStorage.removeItem('note');
+        }
+
+        function downloadPDF() {
+            const noteContent = document.getElementById('noteContent');
+            html2canvas(noteContent, { scale: 2 }).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = pdf.internal.pageSize.getHeight();
+                const imgWidth = pdfWidth - 20; // 10 mm margin on each side
+                const imgHeight = canvas.height * imgWidth / canvas.width;
+
+                let heightLeft = imgHeight;
+                let position = 0;
+
+                pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+                heightLeft -= pdfHeight;
+
+                while (heightLeft >= 0) {
+                    position = heightLeft - imgHeight;
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+                    heightLeft -= pdfHeight;
+                }
+
+                const fileName = prompt('Dosya adını girin:', 'not.pdf');
+                if (fileName) {
+                    pdf.save(fileName);
+                } else {
+                    alert('Geçersiz dosya adı!');
+                }
+            });
+        }
+
+        document.getElementById('imageInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imageUrl = e.target.result;
+                    const noteArea = document.getElementById('noteContent');
+                    noteArea.innerHTML += `<p><img src="${imageUrl}" alt="${file.name}"></p>`;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>

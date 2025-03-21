@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<head>
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    table{
+        margin:0 auto;
+        width: 80%;
+        padding:10px;
+    }
+    th{
+        background-color:rgb(176, 165, 150);
+    }
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+    .grid-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .grid-item {
+        flex: 1 1 48%;
+        text-align: center;
+        margin: 10px;
+    }
+    h1,h2,h3,h4,caption,p {
+        text-align: center;
+    }
+    caption{
+        font-size: 20px;
+        margin-top: 20px;
+        caption-side: top;
+        font-weight: bold;
+        text-align: center;
+    }
+    p,table tr{
+        font-family:'Times New Roman', Times, serif;
+        font-size:20px; 
+    } 
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+    .flex-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between; 
+        gap: 10px; 
+    }
+    .flex-container > div {
+        flex: 1 1 calc(16.66% - 20px); 
+        box-sizing: border-box; 
+    }
+    .flex-container img {
+        width: 100%; 
+        height: auto;
+    }
+    .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 1fr);
+    gap: 10px;
+    }
+    .image-container {
+            position: relative;
+            width: 300px; /* Görsel genişliği */
+            height: 200px; /* Görsel yüksekliği */
+        }
+        .image-container img {
+            width: 100%;
+            height: auto;
+        }
+    @media screen and (max-width:480px){
+        td{
+            padding: 0px;
+        }   
+        .flex-container > div{
+            flex: 1 1 100%; 
+        }    
+    }
+    @media screen and (min-width: 481px) and (max-width: 800px) {
+        .grid-item  img{
+            max-width: 100%;
+        }
+        .flex-container >div {
+            flex: 1 1 calc(50% - 20px); 
+        }      
+    }
+    @media screen and (min-width: 800px) {
+        .grid-container {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .flex-container {
+            flex: 1 1 50%; 
+        }     
+    } 
+    body{
+        font-size: 1.875rem;
+    }
+    
+    
+</style>
+</head>
+<body>
+    <div class="flex-container">
+        <div class="flex-item">
+            <img src="https://images.linshangtech.com/product191226/cbdf97953a2fc847870116e2e76449bc.jpg" >
+        </div>
+        <div class="flex-item">
+            <h2>LS330 Spectral Illuminance Meter</h2>
+            <h4>Measurement of Lux, CCT, UVI and other parameters</h4>
+            <p>Multi-parameter measurement, wider application <br> 1,000,000Lx ultra-large range design <br>Spectral sensor suitable for human eyes spectrum, more accurate.<br> High precision, pass authoritative metrology inspection</p>  
+        </div>
+    </div>
+    <div>
+        <p>LS330 spectral Illuminance Meter is a versatile instrument designed with a spectral sensor. It is used for measuring illuminance, UV index, flicker frequency, standard deviation of color matching (SDCM), color rendering index (CRI), correlated color temperature (CCT), blue light hazard ratio, temperature, and humidity in various scenarios such as lamps and lanterns lighting, outdoor lighting, greenhouse lighting, and stage lighting. The instrument also can display the spectral curve, which helps identify the type of lighting fixture.</p>
+    </div>
+    <div class="flex-container">
+        <div>
+            <img src="https://images.linshangtech.com/product191226/330-lunminance-meter-24062102.jpg" >
+            <div class="overlay"></div>
+            <p>Lighting design and evaluation.</p>
+        </div>
+        <div>
+            <img src="https://images.linshangtech.com/product191226/330-lunminance-meter-24062103.jpg" >
+            <p>Lighting fixture manufacturing and sales</p>
+        </div>
+        <div>
+            <img src="https://images.linshangtech.com/product191226/330-lunminance-meter-24062104.jpg">
+            <p>Film production and photography.</p>
+        </div>
+        <div>
+            <img src="https://images.linshangtech.com/product191226/330-lunminance-meter-24062105.jpg" >
+            <p>Plant grow light optimization.</p>
+        </div>
+        <div>
+            <img src="https://images.linshangtech.com/product191226/330-lunminance-meter-24062106.jpg" >
+            <p>Ambient light monitoring</p>
+        </div>
+        <div>
+            <img src="https://images.linshangtech.com/product191226/330-lunminance-meter-24062107.jpg">
+            <p>Medical and scientific research</p>
+        </div>
+    </div>
+    <div>
+        <table >
+            <caption>PARAMETER</caption>
+            <tr>
+                <th> Parameters</th>
+                <th>Values</th>   
+            </tr>
+            <tr>
+                <td>Illuminance Wavelength Range</td>
+                <td>400nm ~ 700nm</td>
+            </tr>
+            <tr>
+                <td>Illuminance Wavelength Interval</td>
+                <td>10nm</td>
+            </tr>
+            <tr>
+                <td>Illuminance Measurement Range</td>
+                <td>0 ~ 1000000Lx</td>
+            </tr>
+            <tr>
+                <td>Illuminance Resolution</td>
+                <td>0.1Lx</td>
+            </tr>
+            <tr>
+                <td>Illuminance Measurement Accuracy</td>
+                <td>≤±(3%H + 2 Lx) (H is the standard value, calibrated under CIE standard A light source)</td>
+            </tr>
+            <tr>
+                <td>Illuminance Unit Options</td>
+                <td>Lx (default), FC</td>
+            </tr>
+            <tr>
+                <td>Correlated Color Temperature Measurement Range</td>
+                <td>1000 ~ 100000K</td>
+            </tr>
+            <tr>
+                <td>UV Index Measurement Range</td>
+                <td>0.0 ~ 15.0</td>
+            </tr>
+            <tr>
+                <td>Flicker Frequency Measurement Range</td>
+                <td>10 ~ 500HZ</td>
+            </tr>
+            <tr>
+                <td>Temperature Measurement Accuracy</td>
+                <td>±0.5℃</td>
+            </tr><tr>
+                <td>Humidity Measurement Accuracy</td>
+                <td>±4%RH</td>
+            </tr><tr>
+                <td>Response Time</td>
+                <td><0.7s</td>
+            </tr><tr>
+                <td>Test Aperture Diameter</td>
+                <td>    Φ21mm</td>
+            </tr><tr>
+                <td>Size</td>
+                <td>Length 188.5mm, Width 75.2mm, Height 30.3mm</td>
+            </tr><tr>
+                <td>Weight</td>
+                <td>About 232g (including batteries)</td>
+            </tr><tr>
+                <td>Display</td>
+                <td>240*160 Dot Matrix LCD</td>
+            </tr><tr>
+                <td>Power Supply</td>
+                <td>2 AA Alkaline Batteries</td>
+            </tr><tr>
+                <td>Operating Environment</td>
+                <td>Temperature 0 ~ 40℃, Humidity <85%RH</td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <h1  >Features</h1>
+        <h3>Multi-parameter, wider application</h3>
+        <p>The instrument can measure illuminance, color temperature, flicker frequency, UV index, SDCM, CRI, temperature, and humidity simultaneously. It displays spectral curve for comprehensive evaluation of lighting characteristics.</p>
+    </div>
+    <div class="flex-container">
+        <div>
+          <img src="https://images.linshangtech.com/product191226/330-lunminance-meter-24062108.jpg" >  
+        </div>
+        <div>
+            <img src="https://images.linshangtech.com/product191226/330-lunminance-meter-24062109.jpg" >
+        </div>
+        <div>
+           <img src="https://images.linshangtech.com/product191226/330-lunminance-meter-24062110.jpg" > 
+        </div>
+        <div>
+           <img src="https://images.linshangtech.com/product191226/330-lunminance-meter-24062111.jpg" > 
+        </div>   
+    </div>
+    <div>
+        <h2>High-precision spectral sensors suitable for human eyes spectrum</h2>
+        <p>The instrument is designed with a spectral sensor, and the spectral response matches the V(λ) function. This ensures accurate measurement precision.</p>
+        <img src="https://images.linshangtech.com/product191226/330-lunminance-meter-24062112.jpg">
+    </div>
+    <div>
+        <h2>Flicker measurement, easily determine if lighting meets requirements</h2>
+        <p>The instrument features a flicker measurement function, can evaluate whether lighting meets requirements based on flicker frequency and percent flicker. This provides reference for sales and R&D of lighting.</p>
+        <img src="https://images.linshangtech.com/product191226/330-lunminance-meter-24062115.jpg">
+    </div>
+    <div>
+        <h2>CRI and SDCM measurement</h2>
+        <p>The instrument has CRI and SDCM measurement function, clearly showing the difference between the testing light source and the standard light source.</p>
+        <img src="https://images.linshangtech.com/product191226/330-lunminance-meter-24062118.jpg">
+    </div>
+    <div>
+        <h2>Spectral curve measurement</h2>
+        <p>The instrument has spectral measurement function, allowing identification of spectral gaps and blue light protection capabilities.</p>
+        <img src="https://images.linshangtech.com/product191226/330-lunminance-meter-24062121.jpg">
+    </div>
+    <div>
+        <h2>High precision, pass authoritative metrology inspection</h2>
+        <p>The instrument's illuminance and color temperature measurements are ensured to pass authoritativeinspection.</p>
+        <img src="https://images.linshangtech.com/product191226/330-lunminance-meter-24062124.jpg">
+    </div>
+    <div>
+        <h2>Rich statistical functions</h2>
+        <p>Simultaneously displays real-time, maximum, minimum, and average illuminance values.</p>
+        <img src="https://images.linshangtech.com/product191226/330-lunminance-meter-24062125.jpg">
+    </div>
+    <div class="grid-container">             
+        <div class="grid-item">
+            <img src="https://images.linshangtech.com/product191226/330-lunminance-meter-24062129.png">
+            <p>Instant refresh, response time less than 0.7s</p>
+        </div>
+        <div class="grid-item">
+            <img src="https://images.linshangtech.com/product191226/330-lunminance-meter-24062130.png">
+            <p>AutoOff can prevent battery drain</p>
+        </div>
+        <div class="grid-item">
+            <img src="https://images.linshangtech.com/product191226/330-lunminance-meter-24062131.png">
+            <p>Switchable between Lx and Fc</p>
+        </div>                     
+    </div>
+    <div>
+        <table>
+            <caption>Packing</caption>
+            <tr>
+                <td>No.</td>
+                <td>Description</td>
+                <td>Quantity</td>
+                <td>Unit</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Spectral Illuminance Meter</td>
+                <td>1</td>
+                <td>pcs</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>AA Battery</td>
+                <td>2</td>
+                <td>pcs</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>User Manual</td>
+                <td>1</td>
+                <td>pcs</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Calibration Report</td>
+                <td>1</td>
+                <td>pcs</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Certificate/Warranty Card</td>
+                <td>1</td>
+                <td>pcs</td>
+            </tr>
+        </table>
+    </div> 
+</body>

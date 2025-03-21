@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+       *{
+            font-size: 18px;           
+       }
+        .kutu{
+            background-color: rgb(209, 233, 225);
+            display: flex; flex-wrap: wrap; width: 46%;
+            padding: 5px;
+            border-radius: 10px;
+            
+        }
+        .kutu-container{
+            gap: 15px;
+            display: flex; flex-wrap: wrap;
+            justify-content: center;
+        }  
+        .deger-card{
+            display: flex;
+            flex-wrap: wrap;
+            width: 145px;
+            justify-content: center;
+            background-color: aliceblue;
+            text-align: center;       
+        }
+        .deger-card-container{
+            gap:15px;
+            display: flex; justify-content: center;flex-wrap: wrap;
+            margin: 10px;
+        }
+        .fu h4, p, li{
+            margin:  3px;
+        
+        }
+        .fu ul{
+            padding: 20px;
+        }
+        .kutu h4,p{
+            margin: 3px;
+        }
+        .navbar {
+            background-color: #648e9e;
+            display: flex;
+            justify-content: center;
+            height: 50px;
+            width: 100%;
+            z-index: 1;
+        }
+        .navbar a {
+            color: white;
+            text-align: center;
+            padding: 15px 20px;
+            text-decoration: none;
+            width: 50%;
+        }
+        a.active {
+            background-color:#e8e8e8 ;
+            color: black;
+        }
+        .butonlar{
+            margin-top:15px;
+            display: flex;
+            gap:2px;    
+            justify-content: center;    
+            flex-wrap: wrap;
+        }
+        .butonlar p{
+            padding: 10px;
+            cursor: pointer;
+            background-color: #a2b4bb;  
+            border-radius: 5px;  
+            display: inline-block;
+            font-size: 20px;
+        }
+        .butonlar p.active {
+            background-color: #8b5ed3;
+            color: white;
+        } 
+        .modeller {
+            margin-top:15px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .modeller p{
+            background-color: #e8e8e8;       
+            cursor: pointer;
+            padding: 5px;
+            font-size: 20px;
+        }  
+        .Bmw-screen, .Daf-screen{
+            display: none;
+        }    
+        .modeller > div {
+            display: none;
+        }
+        .modeller > div.active {
+            display: flex;
+        } 
+
+        @media screen and (max-width:550px){
+            .kutu{
+                width: auto;
+            }
+            .deger-card{
+                width: 100%;
+                padding: 10px;
+                display: block;
+            }
+            .flex-container{
+                flex-direction: column;
+                align-items: center; 
+            }
+            .modeller > div.active {
+                display: block;
+            } 
+        }
+    </style>
+</head>
+<body>
+    <div style="background-color: rgb(220, 184, 246);">
+        <div class="dıs-kutu" style="margin: 25px; background-color: white; padding: 1%;">
+            <div style="display: flex; justify-content: center;flex-wrap: wrap;">
+                <h3 style="font-size: 35px;">Sail Diag AI-Yapay Zeka Destekli Arıza Tespit Cihazı <img src="https://www.saildiag.com/wp-content/uploads/2024/01/yapay-zeka.png" width="40" height="30" > </h3>
+            </div>
+            <div style="text-align: center;">
+                    <p style="font-size: 25px;color:rgb(88, 138, 173);font-weight:bolder;">Dünyada Bir İlk!</p> 
+                    <p>Sail Diag AI Destekli Arıza Tespit cihazı dünyanın ilk yapay zekaya sahip arıza tespit cihazıdır.</p>
+                    <img src="https://www.canbusemulator.com/images/saildiag-ai-product-en.jpg" width="100%">
+            </div>
+            <div>
+                <h3 style="text-align: center; font-size: 25px;color:rgb(34, 50, 136)">Artık kontrol sizde!</h3>
+                <p>Yağ servis resetleme, parça testleri, adaptasyon, kalibrasyon, parametre değiştirme gibi fonksiyonları birçok marka ve model üzerinde sorunsuz çalışan Sail Diag AI Arıza Tespit Cihazı ile yetkili servis düzeyinde birçok işlemleri gerçekleştirebileceksiniz.</p>
+
+                <div style="display: flex; gap:10px; justify-content: center; flex-wrap: wrap; margin: 10px; ">
+                    <div style="display: flex; border: 1px solid purple; padding: 15px;justify-content: center;width: 200px; border-radius: 10px;box-shadow: 1px 1px 5px #8b5ed3;gap:10px;">
+                        <img src="https://sailteknoloji.com/img/saildiagai/24-7.png" width="30">
+                        <p style="font-size: 20px;">7/24 teknik destek</p>
+                    </div>
+                    <div style="display: flex; border: 1px solid purple; padding: 15px;justify-content: center;width: 200px; border-radius: 10px;box-shadow: 1px 1px 5px #8b5ed3;gap:10px;">
+                        <img src="https://sailteknoloji.com/img/saildiagai/24-7.png" width="30">
+                        <p>Android ve IOS (Yakında) mobil uygulaması</p>
+                    </div>
+                    <div style="display: flex; border: 1px solid purple; padding: 15px;justify-content: center;width: 200px; border-radius: 10px;box-shadow: 1px 1px 5px #8b5ed3;gap:10px;">
+                        <img src="https://sailteknoloji.com/img/saildiagai/time.png" width="30">
+                        <p>5-Yıl garanti</p>
+                    </div>    
+                </div>
+            </div>
+            <div class="kutu-container">
+                <div class="kutu">
+                    <img src="https://www.canbusemulator.com/en/images/saildiag-icons/code-error.png" width="40" height="40" >
+                    <h4 >Hata Kodları Okuma & Sıfırlama</h4>
+                    <p >Aktif ve aktif olmayan hata kodlarını görüntüleyin/sıfırlayın. Ayrıntılı açıklamalar sorun giderme, geçmiş ve olası düzeltmeleri sağlar.</p>
+                </div>
+                <div class="kutu">
+                    <img src="https://www.canbusemulator.com/en/images/saildiag-icons/error.png" width="40" height="40">
+                    <h4>Hata Kodu & Komut Geçmişi</h4>
+                    <p>Bir hata kodunun ne sıklıkta ve ne zaman sıfırlandığını veya zorunlu DPF yenilemesinin sürdüğünü öğrenin.</p>
+                </div>
+                <div class="kutu">
+                    <img src="https://www.canbusemulator.com/en/images/saildiag-icons/reset-emission-reductions.png" width="40" height="40">
+                    <h4>Emisyon Azaltımını Sıfırla</h4>
+                    <p>Son işlem bileşenlerini bir değer kaybına uyacak şekilde değiştirdiğinizde, son işlem değerlerini sıfırlayabilir ve yolunuza devam edebilirsiniz.</p>
+                </div>              
+                <div class="kutu">
+                    <img src="https://www.canbusemulator.com/en/images/saildiag-icons/dpf.png" width="40" height="40">
+                    <h4>Zorunlu DPF Yenilemesini Başlat</h4>
+                    <p>Yüksek kurum yükü veya diğer değişkenler nedeniyle pasif veya aktif yenileme başlatamadığınızda zorunlu yenileme gerçekleştirin.</p>
+                </div>
+                <div class="kutu">
+                    <img src="https://www.canbusemulator.com/en/images/saildiag-icons/live-data.png" width="40" height="40">
+                    <h4>Canlı Veri</h4>
+                    <p>Canlı verileri görüntüleyerek aracınız hakkında her an bilgi sahibi olmanızı sağlar. Veriler şunları içerir: DEF Sıvı Seviyesi, DPF Kurum Seviyesi, EGR Değer Konumu (+daha fazlası)</p>
+                </div>
+                <div class="kutu">
+                    <img src="https://www.canbusemulator.com/en/images/saildiag-icons/offline-mode.png" width="40" height="40">
+                    <h4>Çevrimdışı Mod</h4>
+                    <p>Sail Diag Aracını, son çevrimiçi oturumunuzdan itibaren 14 güne kadar hizmet veya veri bulunmayan yerlerde bile kullanın.</p>
+                </div>
+                <div class="kutu">
+                    <img src="https://www.canbusemulator.com/en/images/saildiag-icons/multi-vehicle.png" width="40" height="40">
+                    <h4>Çoklu Araç VIN'ı</h4>
+                    <p>Çeşitli marka ve motorlara sahip sınırsız sayıda araca tam teşhis erişimi sağlayın.</p>
+                </div>
+            </div>
+            <div style="text-align: center; font-size: 20px; font-family:'Courier New', Courier, monospace; margin: 20px;">
+                <p>"Sail Diag Arıza Tespit Cihazı, diğer standart diagnostik cihazların ötesine geçer."</p>
+            </div>
+            <div class="flex-container" style="display: flex; margin-bottom: 20px;">
+                <div>
+                    <img src="https://www.canbusemulator.com/en/images/saildiag/saildiag-error-codes.jpg" width="200">
+                </div>
+                <div class="fu" >
+                    <h4 style="font-size: 20px; font-weight: bolder;">MOBİL CİHAZINIZDA HATA KODLARINI GÖRÜNTÜLEYİN</h4>
+                    <p>"Sail Diag, arıza kodları, nedenleri ve daha fazlası hakkında önemli bilgilere erişmenizi sağlar. Bu ayrıntılar, diğer standart arıza tespit cihazlarını çok aşan gelişmiş bayilik yazılımlarına rakip olur."</p>
+                    <ul style="margin-top: 0;">
+                        <li>Bu gösterge ışıklarının ne anlama geldiğini hızlıca keşfedin.</li>
+                        <li>Soruna neyin sebep olduğunu öğrenin.</li>
+                        <li>Sorunun ne sıklıkta meydana geldiğini öğrenin.</li>
+                        <li>Nasıl düzeltileceğini veya hangi bileşenlerin değiştirilmesi gerektiğini öğrenin.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="flex-container" style="display: flex;">
+                <div class="fu">
+                    <h4 style="font-size: 20px; font-weight: bolder;">10 Kata Kadar Daha Hızlı</h4>
+                    <p>Bluetooth 4.0 Teknolojisi ile donatılan Sail Diag AI serisi eski arıza tespit cihazınıza nazaran 10 kat daha hızlı çalışır. Bu sayede işlemlerinizi hem daha hızlı tamamlar hem de sonuçlara daha doğru ve profesyonel şekilde ulaşırısınız.</p>
+                    <ul style="margin-top: 0;">
+                        <li>Arıza Kodlarını Sıfırla</li>
+                        <li>Son İşlemleri Sıfırla</li>
+                        <li>Zorunlu DPF yenilenmesi</li>
+                    </ul>
+                </div>
+                <div>
+                    <img src="https://www.canbusemulator.com/en/images/saildiag/saildiag-oil-reset.jpg">
+                </div>
+            </div>
+            <div style="margin-bottom: 20px;">
+                <h4 style="text-align: center; font-size: 25px;color:rgb(112, 31, 179)">Yeniden Ayaklandırın</h4>
+                <p>Parametre okuma/yazma ve parça adaptasyon testleri sayesinde Sail Diag Arıza Tespit Cihazı ile ham beyinleri kodlayabilir, parça değişimi sonrası ihtiyaç duyulan sensor test ve kalibrasyonlarını yapabilirsiniz. Bu sayede 2. el parçalarınızın testlerini de yaparak hurdaya gidecek ürünlerinizi paraya çevirebilirsiniz.</p>
+            </div>
+            <div>
+                <p>Sail Diag AI aşağıdaki değerleri izlemenizi sağlar:</p>
+                <div class="deger-card-container">
+                    <div class="deger-card">
+                        <img src="https://www.canbusemulator.com/en/images/saildiag-icons-2/dpf-level.png " width="50">
+                        <p>DPF Seviyesi</p>
+                    </div>
+                    <div class="deger-card">
+                        <img src="https://www.canbusemulator.com/en/images/saildiag-icons-2/dpf-institution-level.png" width="50">
+                        <p>DPF Kurum Seviyesi</p>
+                    </div>
+                    <div class="deger-card">
+                        <img src="https://www.canbusemulator.com/en/images/saildiag-icons-2/egr-valve-location.png" width="50">
+                        <p>EGR Valvi Konumu</p>
+                    </div>
+                    <div class="deger-card">
+                        <img src="https://www.canbusemulator.com/en/images/saildiag-icons-2/exhaust-temperatures.png" width="50">
+                        <p>Egzoz Sıcaklıkları</p>
+                    </div>
+                    <div class="deger-card">
+                        <img src="https://www.canbusemulator.com/en/images/saildiag-icons-2/battery-voltage.png" width="50">
+                        <p>Akü Gerilimi</p>
+                    </div>
+                    <div class="deger-card">
+                        <img src="https://www.canbusemulator.com/en/images/saildiag-icons-2/increase-pressure.png" width="50">
+                        <p>Basınç Artışı</p>
+                    </div>
+                    <div class="deger-card">
+                        <img src="https://www.canbusemulator.com/en/images/saildiag-icons-2/accelerator-pedal-position.png" width="50">
+                        <p>Gaz Pedalı Konumu</p>
+                    </div>
+                    <div class="deger-card">
+                        <img src="https://www.canbusemulator.com/en/images/saildiag-icons-2/dpf-level.png" width="50">
+                        <p>Motor Yakıtı Çıkış Basıncı</p>
+                    </div>
+                </div>   
+            </div>
+            <div>
+                <p style="background-color: rgb(234, 234, 170); padding: 10px; text-align: center;">Paketlere gerekli tüm donanım ve 1 yıllık abonelik dahildir.</p>
+            </div>
+            <div>
+                <h4>Desteklenen Modeller</h4>
+                <div>
+                    <nav class="navbar">
+                        <a href="#" onclick="toggleScreens('Ford-screen', 'Bmw-screen','Daf-screen')" class="active">Ford</a>
+                        <a href="#" onclick="toggleScreens('Bmw-screen','Ford-screen', 'Daf-screen')">Bmw</a>
+                        <a href="#" onclick="toggleScreens('Daf-screen','Ford-screen', 'Bmw-screen')">Daf</a>
+                    </nav>
+                    <div class="Ford-screen">
+                        <div class="butonlar">
+                            <p onclick="toggleModels('Ford-screen', 'All')">All</p>
+                            <p onclick="toggleModels('Ford-screen', 'Ford-Cargo')">All Ford Cargo Euro 6 Models</p>
+                            <p onclick="toggleModels('Ford-screen', 'F-Max')">F Max All Models</p>
+                        </div>
+                        <div class="modeller">
+                            <div class="F-Max">
+                                <p>F-MAX Blackline</p>
+                                <p>F-MAX L (1050L), F-MAX L (1350L)</p>
+                                <p>F-MAX Midilli, F-MAX Midilli (Comfort Plus Package)</p>
+                                <p>F-MAX, F-MAX (Comfort Plus Package)</p>
+                            </div>
+                            <div class="Ford-Cargo">
+                                <p>Ford Cargo 1833D</p>
+                                <p>Ford Cargo 1842T</p>
+                                <p>Ford Cargo 1848</p>
+                                <p>Ford Cargo 2533</p>
+                                <p>Ford Cargo 2533D</p>
+                                <p>Ford Cargo 2542</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Bmw-screen">
+                        <div class="butonlar">
+                            <p onclick="toggleModels('Bmw-screen', 'All')">All</p>
+                            <p onclick="toggleModels('Bmw-screen', 'I3-model')">I3</p>
+                            <p onclick="toggleModels('Bmw-screen', 'I4-model')">I4</p>
+                            <p onclick="toggleModels('Bmw-screen', 'I5-model')">I5</p>
+                            <p onclick="toggleModels('Bmw-screen', 'I7-model')">I7</p>
+                            <p onclick="toggleModels('Bmw-screen', 'IX-model')">IX</p>
+                            <p onclick="toggleModels('Bmw-screen', 'IX1-model')">IX1</p>
+                            <p onclick="toggleModels('Bmw-screen', 'IX3-model')">IX3</p>
+                        </div>    
+                        <div class="modeller">
+                            <div class="I3-model">
+                                <p>I3 – Edition Electric</p>
+                                <p>I3 – Lodge</p>
+                                <p>I3 – Premium Techno</p>
+                                <p>I3 – Pure</p>
+                                <p>I3 – Suite</p>
+                            </div>
+                            <div class="I4-model">
+                                <p>eDrive40</p>
+                                <p>I4-M50</p>
+                            </div>
+                            <div class="I5-model">
+                                <p>eDrive40</p>
+                                <p>I5 – M60 xDrive</p>        
+                            </div>
+                            <div class="I7-model">
+                                <p>I7 – xDrive60 Pure Excellence</p>
+                                <p>I7 – M70 xDrive</p>
+                                <p>I7 – xDrive60 M Excellence</p>
+                                <p>I7-M60</p>
+                            </div>
+                            <div class="IX-model">
+                                <p>eDrive40</p>
+                                <p>IX – M60</p>
+                                <p>IX – xDrive50</p>
+                            </div>
+                            <div class="IX1-model">
+                                <p>IX1 – M Sport</p>
+                                <p>IX1 – X Line</p>
+                                <p>IX1 – xDrive30</p>
+                            </div>
+                            <div class="IX3-model">
+                                <p>IX3 – eDrive20</p>
+                                <p>IX3 – eDrive30</p>
+                                <p>IX3 – Impressive</p>
+                            </div>
+                        </div>           
+                    </div>
+                    <div class="Daf-screen">
+                        <div class="butonlar">
+                            <p onclick="toggleModels('Daf-screen', 'All')">All</p>
+                            <p onclick="toggleModels('Daf-screen', 'LF-model')">LF</p>
+                            <p onclick="toggleModels('Daf-screen', 'XD-model')">XD</p>
+                            <p onclick="toggleModels('Daf-screen', 'XF-model')">XF</p>
+                            <p onclick="toggleModels('Daf-screen', 'XG/XG+-model')">XG/XG+</p>
+                        </div>   
+                        <div class="modeller">
+                            <div class="LF-model">
+                                <p>LFE6</p>
+                            </div>
+                            <div class="XD-model">
+                                <p>XD E6 (G1/CB) 2022-…</p>
+                            </div>
+                            <div class="XF-model">
+                                <p>XF E6 2014-2016</p>
+                                <p>XF E6 2017-2020</p>
+                            </div>
+                            <div class="XG/XG+-model">
+                                <p>XG E6 (G3/CB) 2021-…</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        
+        function toggleScreens(activeScreen, ...inactiveScreens) {
+            inactiveScreens.forEach(screen => {
+                document.querySelector(`.${screen}`).style.display = 'none';
+            });
+            document.querySelector(`.${activeScreen}`).style.display = 'block';
+        }
+        toggleScreens('Ford-screen', 'Bmw-screen', 'Daf-screen');
+
+        document.querySelectorAll('.navbar a').forEach(link => {
+            link.addEventListener('click', function() {
+                event.preventDefault(); 
+                document.querySelector('.navbar a.active')?.classList.remove('active');
+                this.classList.add('active');
+            });
+        });
+        document.querySelectorAll('.butonlar p').forEach(link => {
+            link.addEventListener('click', function() {
+                event.preventDefault();
+                document.querySelector('.butonlar p.active')?.classList.remove('active');
+                this.classList.add('active');
+            });
+        });
+        function toggleModels(screenClass, modelClass) {
+            const screen = document.querySelector(`.${screenClass}`);
+            const models = screen.querySelectorAll('.modeller > div');
+
+            if (modelClass === 'All') {
+                models.forEach(model => {
+                    model.classList.add('active');
+                });
+            } else {
+                models.forEach(model => {
+                    if (model.classList.contains(modelClass)) {
+                        model.classList.add('active');
+                    } else {
+                        model.classList.remove('active');
+                    }
+                });
+            }
+        }
+    </script>
+</body>

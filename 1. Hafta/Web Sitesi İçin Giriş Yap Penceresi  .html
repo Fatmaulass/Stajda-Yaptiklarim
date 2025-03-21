@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="tr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+            }
+            .grid-container {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                align-items: start;
+            }
+            .navbar {
+                background-color: #648e9e;
+                display: flex;
+                justify-content: center;
+                height: 50px;
+                width: 100%;
+                z-index: 1;
+            }
+            .navbar a {
+                color: white;
+                text-align: center;
+                padding: 15px 20px;
+                text-decoration: none;
+                width: 50%;
+            }
+             a.active {
+                background-color:#e8e8e8 ;
+                color: black;
+            }
+            .container {
+                text-align: center;
+                margin-top: 20px;
+            }
+            .hidden {
+                display: none;
+            }
+            .box {
+                background-color: #e8e8e8;
+                border-radius: 4px;
+                max-width: 700px;
+                margin: 20px auto;
+                position: relative;
+                padding-top: 0;
+            }
+            .fotograf {                  
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;      
+            }
+            .fotograf img {
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
+            }
+            .screen {
+                margin-top: 50px;              
+            }
+            .girdi-container {
+                display: flex;
+                align-items: center;
+                margin-bottom: 15px;
+                position: relative;
+            }
+            .girdi-container label {
+                display: inline-block;
+                width: 30px;
+                text-align: center;
+            }
+            .girdi-container input {
+                width: 100%;
+                padding: 8px;
+                padding-right: 40px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+            .girdi-container i.eye-icon {
+                position: absolute;
+                right: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+                cursor: pointer;
+            }
+            .onaybutonu {
+                background-color: #a077d1;
+                border: none;
+                color: rgb(255, 252, 252);
+                padding: 15px 20px;
+                text-align: center;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                border-radius: 4px;
+            }
+            .onaybutonu:hover {
+                background-color: #f4b700;
+                color: rgb(14, 28, 41);
+            }
+            .fa-lg {
+                position: absolute;
+                right: 8px;
+                top: 15px;
+                font-size: 20px;
+                cursor: pointer;
+            }
+            .fa-lg:hover {
+                color: red;
+                font-size: 25px;
+            }
+            .cıkıs {
+                position: absolute;
+                right: -10px;
+                top: -14px;
+                cursor: pointer;
+                background-color: #fbfafa;
+                padding: 15px 15px;
+                border-radius: 100%;    
+            }
+            @media screen and (max-width: 600px) {
+                .fotograf {
+                    display: none;
+                }
+                .box {
+                    max-width: 300px;
+                }
+                .navbar {
+                    height: 50px;
+                    width: 300px;
+                }
+                .screen{
+                    margin-top: 20px;;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <button class="onaybutonu" onclick="openBox()">Giriş</button>                   
+            <div id="box" class="box hidden">
+                <button class="cıkıs" onClick="closeBox()"><i class="fa-sharp fa-solid fa-xmark fa-rotate-270 fa-lg"></i>  </button>                       
+                <div class="grid-container">
+                    <div class="fotograf">
+                        <img src="https://static8.depositphotos.com/1016676/815/i/450/depositphotos_8157927-stock-photo-truck-on-road.jpg" alt="Kamyon Görseli">
+                    </div>
+                    <div>
+                        <nav class="navbar">
+                            <a href="#" onclick="toggleScreens('login-screen', 'signup-screen')">Oturum Aç</a>
+                            <a href="#" onclick="toggleScreens('signup-screen', 'login-screen')">Kaydol</a>
+                        </nav>     
+                        <div id="login-screen" class="screen">
+                            <form id="login-form">
+                                <div class="girdi-container">
+                                    <label for="login-username"><i class="fas fa-user"></i></label>
+                                    <input type="text" id="login-username" name="username" placeholder="Kullanıcı Adı" required>
+                                </div>
+                                <div class="girdi-container">
+                                    <label for="login-password"><i class="fas fa-lock"></i></label>
+                                    <input type="password" id="login-password" name="password" placeholder="Şifre" required>
+                                    <i class="fas fa-eye eye-icon" id="toggleLoginPassword" onclick="sifreGörünürlügü('login-password', 'toggleLoginPassword')"></i>
+                                </div>
+                                <button class="onaybutonu" type="submit">Oturum Aç</button>
+                            </form>
+                        </div>                    
+                        <div id="signup-screen" class="screen hidden">
+                            <form id="signup-form" onsubmit="return validateSignupForm()">
+                                <h3>Müşteri Bilgileri</h3>
+                                <div class="girdi-container">
+                                    <label for="signup-username"><i class="fas fa-user"></i></label>
+                                    <input type="text" id="signup-username" name="username" placeholder="Kullanıcı Adı" required>
+                                </div>
+                                <div class="girdi-container">
+                                    <label for="signup-email"><i class="fas fa-envelope"></i></label>
+                                    <input type="email" id="signup-email" name="email" placeholder="E-posta" required>
+                                </div>
+                                <div class="girdi-container">
+                                    <label for="signup-name"><i class="fa-regular fa-user"></i></label>
+                                    <input type="text" id="signup-name" name="signup-name" placeholder="Adınız" required>
+                                </div>
+                                <div class="girdi-container">
+                                    <label for="surname"><i class="fa-regular fa-user"></i></label>
+                                    <input type="text" id="surname" name="surname" placeholder="Soyadınız" required>
+                                </div>
+                                <div class="girdi-container">                       
+                                    <label for="signup-password"><i class="fas fa-lock"></i></label>
+                                    <input type="password" id="signup-password" name="password" placeholder="Şifre" required>
+                                    <i class="fas fa-eye eye-icon" id="toggleSignupPassword" onclick="sifreGörünürlügü('signup-password', 'toggleSignupPassword')"></i>
+                                </div>
+                                <div class="girdi-container">
+                                    <label for="signup-password-confirm"><i class="fas fa-lock"></i></label>
+                                    <input type="password" id="signup-password-confirm" name="password-confirm" placeholder="Şifre Tekrar" required>
+                                    <i class="fas fa-eye eye-icon" id="toggleSignupPasswordConfirm" onclick="sifreGörünürlügü('signup-password-confirm', 'toggleSignupPasswordConfirm')"></i>
+                                </div>
+                                <hr>
+                                <h3>Fatura Adresi</h3> 
+                                <div class="girdi-container">
+                                    <label for="signup-kurum"><i class="fa-regular fa-building"></i></label>
+                                    <input type="text" id="signup-kurum" name="signup-kurum" placeholder="Kurum" required>
+                                </div>
+                                <div class="girdi-container">
+                                    <label for="signup-başlık"></label>
+                                    <input type="text" id="signup-başlık" name="signup-başlık" placeholder="Bay/Bayan" required>
+                                </div>
+                                <div class="girdi-container">
+                                    <label for="signup-adres"></label>
+                                    <input type="text" id="signup-adres" name="signup-adres" placeholder="Adres(Mah,Sok,No,İl,İlçe,Posta Kodu)" required>
+                                </div>
+                                <div class="girdi-container">
+                                    <label for="signup-PostaKodu"></label>
+                                    <input type="number" id="signup-PostaKodu" name="signup-PostaKodu" placeholder="Posta Kodu" min="0" required>
+                                </div>
+                                <div class="girdi-container">
+                                    <label for="signup-ülke"></label>
+                                    <input type="text" id="signup-ülke" name="signup-ülke" placeholder="Ülke" required>
+                                </div>
+                                <div class="girdi-container">
+                                    <label for="signup-sehir"></label>
+                                    <input type="text" id="signup-sehir" name="signup-sehir" placeholder="Şehir" required>
+                                </div>
+                                <div class="girdi-container">
+                                    <label for="signup-ilce"></label>
+                                    <input type="text" id="signup-ilce" name="signup-ilce" placeholder="İlçe" required>
+                                </div>
+                                <div class="girdi-container">
+                                    <label for="signup-telefon"></label>
+                                    <input type="number" id="signup-telefon" name="signup-telefon" placeholder="Telefon" min="0" required>
+                                </div>
+                                <button class="onaybutonu" type="submit">Kaydol</button>
+                            </form>
+                        </div>                    
+                    </div>
+                </div>     
+            </div>
+        </div>
+        <script>
+            function openBox() {
+                document.getElementById('box').classList.remove('hidden');
+            }
+            function toggleScreens(openScreenId, closeScreenId) {
+                document.getElementById(openScreenId).classList.remove('hidden');
+                document.getElementById(closeScreenId).classList.add('hidden');
+            }
+            function closeBox() {
+                document.getElementById('box').classList.add('hidden');
+            }
+            function sifreGörünürlügü(passwordId, toggleIconId) {
+                const passwordField = document.getElementById(passwordId);
+                const toggleIcon = document.getElementById(toggleIconId);
+                if (passwordField.type === "password") {
+                    passwordField.type = "text";
+                    toggleIcon.classList.remove("fa-eye");
+                    toggleIcon.classList.add("fa-eye-slash");
+                } else {
+                    passwordField.type = "password";
+                    toggleIcon.classList.remove("fa-eye-slash");
+                    toggleIcon.classList.add("fa-eye");
+                }
+            }
+            function validateSignupForm() {
+                const password = document.getElementById('signup-password').value;
+                const passwordConfirm = document.getElementById('signup-password-confirm').value;
+                if (password !== passwordConfirm) {
+                    alert("Şifreler uyuşmuyor!");
+                    return false; 
+                }
+                return true; 
+            }
+            document.addEventListener('click', function(event) {
+                const box = document.getElementById('box');
+                if (!box.contains(event.target) && !event.target.matches('.onaybutonu')) {
+                    closeBox();
+                }
+            });
+           
+            document.querySelectorAll('nav a').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('nav a').forEach(li => li.classList.remove('active'));
+                item.classList.add('active');
+            });
+        });
+
+        </script>
+    </body>
+</html>

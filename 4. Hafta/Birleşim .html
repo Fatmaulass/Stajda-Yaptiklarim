@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Not Defteri</title>
+    <style>
+        #canvas {
+            border: 1px solid black;
+            display: block;
+            margin: 0 auto;
+            touch-action: none; /* Mobil cihazlarda düzgün çalışması için */
+            background-color: aliceblue;
+        }
+        .controls {
+            text-align: center;
+            margin-top: 10px;
+        }
+        button, input[type="color"], input[type="range"] {
+            margin: 3px;
+            padding: 5px;
+            cursor: pointer;
+        }
+        .active {
+            background-color: rgb(10, 15, 56);
+            color: white;
+        }
+        #notePad {
+            width: 100%;
+            height: 200px;
+            background-color: rgb(219, 231, 249);
+            color: rgb(5, 2, 2);
+            box-shadow: 3px 3px 7px rgb(35, 53, 172);
+            padding: 5px;
+            border: 2px green dotted;
+            margin-bottom: 10px;
+        }
+        #noteContent {
+            width: 100%;
+            min-height: 200px;
+            background-color: rgb(219, 231, 249);
+            color: rgb(5, 2, 2);
+            box-shadow: 3px 3px 7px rgb(35, 53, 172);
+            padding: 5px;
+            border: 2px green dotted;
+            margin-bottom: 10px;
+        }
+        button, input[type="color"] {
+            background-color: aliceblue;
+            padding: 5px;
+            font-size: 18px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        input[type="file"] {
+            cursor: pointer;
+        }
+        h3, .butonlar {
+            display: flex;
+            justify-content: center;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        label {
+            cursor: pointer;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div style="display: flex; gap:10px;">
+        <div class="metin" id="metinBolumu" style="margin: 10px;">
+            <h2 id="metinBaslik" style="text-align: center; cursor: pointer;">NotePad Uygulaması</h2>
+            <div id="metinIcerik" class="hidden">
+                <textarea id="notePad" placeholder="Notunuzu buraya yazınız.."></textarea>
+                <label for="imageInput" style="display: block; text-align: center; margin-top: 10px;">
+                    Fotoğraf Seç
+                    <input type="file" id="imageInput" accept="image/*" style="display: none;" />
+                </label>
+                <label for="colorPicker" style="display: block; text-align: center; margin-top: 10px;">
+                    Yazı Rengini Seç
+                    <input type="color" id="colorPicker" value="#000000" />
+                </label>
+                <div class="butonlar">
+                    <button onclick="kaydet()">Kaydet</button>
+                    <button onclick="temizle()">Temizle</button>
+                    <button onclick="downloadPDF()">PDF Olarak İndir</button>
+                </div>
+                <div id="noteContent"></div>
+            </div>
+        </div>
+        <div class="kalem" id="kalemBolumu" style="margin: 10px;">
+            <h2 id="kalemBaslik" style="text-align: center; cursor: pointer;">Kalemle Çizme</h2>
+            <div id="kalemIcerik" class="hidden">
+                <canvas id="canvas" width="500" height="380"></canvas>
+                <div class="controls">
+                    <input type="color" id="colorPickerCanvas" value="#000000">
+                    <button id="eraserButton" onclick="toggleEraser()">Silgi</button>
+                    <button onclick="clearCanvas()">Temizle</button>
+                    <button onclick="saveAsImage()">Kaydet</button>
+                    <div>
+                        <label for="sizePicker">Kalem/Silgi Boyutu: </label>
+                        <input type="range" id="sizePicker" min="0.1" max="25" value="5" step="0.1">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Başlıkların tıklanma olayları
+        document.getElementById('metinBaslik').addEventListener('click', function() {
+            toggleSections('metin');
+        });
+
+        document.getElementById('kalemBaslik').addEventListener('click', function() {
+            toggleSections('kalem');
+        });
+
+        function toggleSections(section) {
+            const metinIcerik = document.getElementById('metinIcerik');
+            const kalemIcerik = document.getElementById('kalemIcerik');
+
+            if (section === 'metin') {
+                metinIcerik.classList.remove('hidden');
+                kalemIcerik.classList.add('hidden');
+            } else if (section === 'kalem') {
+                kalemIcerik.classList.remove('hidden');
+                metinIcerik.classList.add('hidden');
+            }
+        }
+
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const eraserButton = document.getElementById('eraserButton');
+
+        let drawing = false;
+        let color = document.getElementById('colorPickerCanvas').value;
+        let erasing = false; // Silgi modu kontrolü
+        let lineWidth = document.getElementById('sizePicker').value;
+
+        // Canvas üzerinde çizim başlatma
+        canvas.addEventListener('touchstart', startDrawing);
+        canvas.addEventListener('mousedown', startDrawing);
+
+        // Canvas üzerinde çizim yapma
+        canvas.addEventListener('touchmove', draw);
+        canvas.addEventListener('mousemove', draw);
+
+        // Canvas üzerinde çizimi durdurma
+        canvas.addEventListener('touchend', stopDrawing);
+        canvas.addEventListener('mouseup', stopDrawing);
+
+        // Renk seçiciyi güncelleme
+        document.getElementById('colorPickerCanvas').addEventListener('input', function(event) {
+            color = event.target.value;
+            erasing = false; // Renk seçildiğinde silgi modundan çık
+            eraserButton.classList.remove('active'); // Silgi modu kapalı
+        });
+
+        // Boyut seçiciyi güncelleme
+        document.getElementById('sizePicker').addEventListener('input', function(event) {
+            lineWidth = event.target.value;
+        });
+
+        function startDrawing(event) {
+            drawing = true;
+
+            // Sadece çizim alanı boşsa arka plan rengini ekleyin
+            if (ctx.getImageData(0, 0, canvas.width, canvas.height).data.every((value) => value === 0)) {
+                ctx.fillStyle = '#f0f8ff'; 
+                ctx.fillRect(0, 0, canvas.width, canvas.height); // Arka planı çiz
+            }
+
+            ctx.lineWidth = lineWidth; // Çizim kalınlığını ayarla
+            ctx.beginPath();
+            ctx.moveTo(getX(event), getY(event));
+            event.preventDefault(); // Mobil tarayıcılarda varsayılan davranışı önlemek
+        }
+
+        function draw(event) {
+            if (!drawing) return;
+            ctx.strokeStyle = erasing ? '#f0f8ff' : color; // Silgi modunda iken arka plan rengine boyar
+            ctx.lineWidth = lineWidth; // Çizim kalınlığını güncelle
+            ctx.lineTo(getX(event), getY(event));
+            ctx.stroke();
+            event.preventDefault();
+        }
+
+        function stopDrawing(event) {
+            if (!drawing) return;
+            drawing = false;
+            ctx.closePath();
+        }
+
+        function toggleEraser() {
+            erasing = !erasing;
+            eraserButton.classList.toggle('active', erasing);
+        }
+
+        // Event'ten koordinatları alma
+        function getX(event) {
+            return event.touches ? event.touches[0].clientX - canvas.offsetLeft : event.clientX - canvas.offsetLeft;
+        }
+
+        function getY(event) {
+            return event.touches ? event.touches[0].clientY - canvas.offsetTop : event.clientY - canvas.offsetTop;
+        }
+
+        // Canvas'ı temizleme
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        // Canvas'ı resim olarak kaydetme
+        function saveAsImage() {
+            const canvasElement = document.getElementById('canvas');
+            const image = canvasElement.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+            const link = document.createElement('a');
+            link.href = image;
+            link.download = 'drawing.png';
+            link.click();
+        }
+
+        window.onload = function() {
+            const savedNote = localStorage.getItem('note');
+            const savedColor = localStorage.getItem('color');
+
+            if (savedNote) {
+                document.getElementById('noteContent').innerHTML = savedNote;
+            }
+
+            if (savedColor) {
+                document.getElementById('colorPicker').value = savedColor;
+            }
+        }
+
+        function kaydet() {
+            const notePadContent = document.getElementById('notePad').value;
+            const noteContent = document.getElementById('noteContent').innerHTML;
+            const selectedColor = document.getElementById('colorPicker').value;
+            const coloredContent = `<span style="color: ${selectedColor};">${notePadContent}</span>`;
+            const fullContent = `${noteContent}<div>${coloredContent}</div>`;
+            localStorage.setItem('note', fullContent);
+            document.getElementById('noteContent').innerHTML = fullContent;
+            document.getElementById('notePad').value = '';
+        }
+
+        function temizle() {
+            document.getElementById('notePad').value = '';
+            document.getElementById('noteContent').innerHTML = '';
+            localStorage.removeItem('note');
+        }
+
+        function downloadPDF() {
+            const noteContent = document.getElementById('noteContent');
+            html2canvas(noteContent, { scale: 2 }).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = pdf.internal.pageSize.getHeight();
+                const imgWidth = pdfWidth - 20; // 10 mm margin on each side
+                const imgHeight = canvas.height * imgWidth / canvas.width;
+
+                let heightLeft = imgHeight;
+                let position = 0;
+
+                pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+                heightLeft -= pdfHeight;
+
+                while (heightLeft >= 0) {
+                    position = heightLeft - imgHeight;
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+                    heightLeft -= pdfHeight;
+                }
+
+                const fileName = prompt('Dosya adını girin:', 'not.pdf');
+                if (fileName) {
+                    pdf.save(fileName);
+                } else {
+                    alert('Geçersiz dosya adı!');
+                }
+            });
+        }
+
+        document.getElementById('imageInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imageUrl = e.target.result;
+                    const noteArea = document.getElementById('noteContent');
+                    noteArea.innerHTML += `<p><img src="${imageUrl}" alt="${file.name}"></p>`;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>

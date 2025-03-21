@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobil Not Defteri</title>
+    <style>
+        #canvas {
+            border: 1px solid black;
+            display: block;
+            margin: 0 auto;
+            touch-action: none;/*Mobil cihazlarda düzgün çalışması için */
+            background-color: aliceblue;
+        }
+        .controls {
+            text-align: center;
+            margin-top: 10px;
+        }
+        button, input[type="color"], input[type="range"] {
+            margin: 3px;
+            padding: 5px;
+            cursor: pointer;
+        }
+        .active{
+            background-color: rgb(10, 15, 56);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h2 style="text-align: center;">Kalemle Çizme</h2>
+    <canvas id="canvas" width="500" height="380"></canvas>
+    <div class="controls">
+        <input type="color" id="colorPicker" value="#000000">
+        <button id="eraserButton" onclick="toggleEraser()">Silgi</button>
+        <button onclick="clearCanvas()">Temizle</button>
+        <button onclick="saveAsImage()">Kaydet</button>
+        <div>
+            <label for="sizePicker">Kalem/Silgi Boyutu: </label>
+            <input type="range" id="sizePicker" min="0.1" max="25" value="5" step="0.1">
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const eraserButton = document.getElementById('eraserButton');
+
+        let drawing = false;
+        let color = document.getElementById('colorPicker').value;
+        let erasing = false; // Silgi modu kontrolü
+        let lineWidth = document.getElementById('sizePicker').value;
+
+        // Canvas üzerinde çizim başlatma
+        canvas.addEventListener('touchstart', startDrawing);
+        canvas.addEventListener('mousedown', startDrawing);
+
+        // Canvas üzerinde çizim yapma
+        canvas.addEventListener('touchmove', draw);
+        canvas.addEventListener('mousemove', draw);
+
+        // Canvas üzerinde çizimi durdurma
+        canvas.addEventListener('touchend', stopDrawing);
+        canvas.addEventListener('mouseup', stopDrawing);
+
+        // Renk seçiciyi güncelleme
+        document.getElementById('colorPicker').addEventListener('input', function(event) {
+            color = event.target.value;
+            erasing = false; // Renk seçildiğinde silgi modundan çık
+            eraserButton.classList.remove('active'); // Silgi modu kapalı
+        });
+
+        // Boyut seçiciyi güncelleme
+        document.getElementById('sizePicker').addEventListener('input', function(event) {
+            lineWidth = event.target.value;
+        });
+
+        function startDrawing(event) {
+            drawing = true;
+
+            // Sadece çizim alanı boşsa arka plan rengini ekleyin
+            if (ctx.getImageData(0, 0, canvas.width, canvas.height).data.every((value) => value === 0)) {
+                ctx.fillStyle = '#f0f8ff'; 
+                ctx.fillRect(0, 0, canvas.width, canvas.height); // Arka planı çiz
+            }
+
+            ctx.lineWidth = lineWidth; // Çizim kalınlığını ayarla
+            ctx.beginPath();
+            ctx.moveTo(getX(event), getY(event));
+            event.preventDefault(); // Mobil tarayıcılarda varsayılan davranışı önlemek
+        }
+
+        function draw(event) {
+            if (!drawing) return;
+            ctx.strokeStyle = erasing ? '#f0f8ff' : color; // Silgi modunda iken arka plan rengine boyar
+            ctx.lineWidth = lineWidth; // Çizim kalınlığını güncelle
+            ctx.lineTo(getX(event), getY(event));
+            ctx.stroke();
+            event.preventDefault();
+        }
+
+        function stopDrawing(event) {
+            if (!drawing) return;
+            drawing = false;
+            ctx.closePath();
+        }
+
+        function toggleEraser() {
+            erasing = !erasing;
+            eraserButton.classList.toggle('active', erasing);
+        }
+
+        // Event'ten koordinatları alma
+        function getX(event) {
+            return event.touches ? event.touches[0].clientX - canvas.offsetLeft : event.clientX - canvas.offsetLeft;
+        }
+
+        function getY(event) {
+            return event.touches ? event.touches[0].clientY - canvas.offsetTop : event.clientY - canvas.offsetTop;
+        }
+
+        // Canvas'ı temizleme
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        // Canvas'ı resim olarak kaydetme
+        function saveAsImage() {
+            const canvasElement = document.getElementById('canvas');
+            const originalBgColor = canvasElement.style.backgroundColor;
+            canvasElement.style.backgroundColor = '#f0f8ff';
+
+            const link = document.createElement('a');
+            link.href = canvasElement.toDataURL('image/png');
+            link.download = 'drawing.png';
+            link.click();
+
+            // Arka plan rengini eski haline döndür
+            canvasElement.style.backgroundColor = originalBgColor;
+        }
+    </script>
+</body>
+</html>

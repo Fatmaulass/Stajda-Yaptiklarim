@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .marka-container {          
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .marka-item {
+            background-image: url('https://www.canbusemulator.com/images/desteklenen/brand-bg.jpg');
+            background-size: cover; 
+            color: rgb(67, 57, 57);
+            border-radius: 5px;
+            padding: 15px;         
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            width: 130px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            border:1px solid rgb(155, 154, 154);
+        }
+        .input-container {
+            border: 1px solid rgb(91, 89, 89);
+            max-width: 220px;
+            padding: 7px;
+            display: flex;
+            gap:5px;
+        }
+        .input-container input {
+            width: 90%;
+            padding: 5px;
+            margin-bottom: 3px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .input-container button {        
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color:rgb(68, 134, 227); 
+            margin-bottom:3px; 
+            padding: 5px;
+        }
+        .marka-item:hover{
+            border: 1px solid #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div id="markaList" class="marka-container">
+        </div>
+        <div class="input-container">
+            <input type="text" id="newmarka" placeholder="Yeni Marka ">
+            <button onclick="addNewmarka()" >Marka Ekle</button>
+        </div>
+    </div>
+    
+    <script>
+        const markalar = ["Akia", "Atlas", "Baud", "dd", "ff", "rr", "tt", "yy", "qq", "ww", "gg", "zz", "ll", "aa"];     
+        function populateMarkaList() {
+            const markaList = document.getElementById("markaList");
+            markaList.innerHTML = ''; 
+            markalar.forEach(marka => {
+                const markaItem = document.createElement("div");
+                markaItem.className = 'marka-item';
+                markaItem.textContent = marka;
+                markaList.appendChild(markaItem);
+            });
+        }
+        function addNewmarka() {
+            const newmarka = document.getElementById('newmarka').value.trim();
+            if (newmarka && !markalar.includes(newmarka)) {
+                markalar.push(newmarka);
+                populateMarkaList();
+                document.getElementById('newmarka').value = '';
+            }
+        }
+        window.onload = populateMarkaList;
+    </script>
+</body>
+</html>
